@@ -1,0 +1,1119 @@
+:root {
+    --fc: #edece1;
+    --sc: #b8b176;
+    --tc: #2c2d35;
+    --ftc: #86928b;
+    --ffc: #f5f6f4;
+    --sxc: #e6e8d4;
+    --svc: #837e3d;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+*:focus {
+    outline: 3px solid var(--sc);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+html {
+    width: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    transition: opacity ease-in 0.2s;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+body[unresolved] {
+    opacity: 0;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.scroll-active {
+    overflow: hidden;
+}
+
+.header_section {
+    background: var(--fc);
+}
+
+.container {
+    max-width: 1130px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 33px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo_img {
+    max-width: 35px;
+    max-height: 35px;
+    width: 100%;
+    height: 100%;
+}
+
+.logo_text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    color: var(--sc);
+}
+
+.nav_list {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.nav_item:first-child {
+    display: none;
+    z-index: 3;
+}
+
+.nav_link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    color: var(--tc);
+    transition: color 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.nav_link:hover {
+    color: var(--sc);
+}
+
+.audio_player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play_audio {
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2C2D35;
+    margin-bottom: 5px;
+}
+
+/* MAIN */
+.main {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.main_heading {
+    font-size: 60px;
+    font-weight: 500;
+    line-height: 66px;
+    color: var(--tc);
+}
+
+.main_heading span {
+    color: var(--sc);
+}
+
+.main_subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    margin-top: 20px;
+    color: var(--ftc);
+}
+
+.main_button {
+    margin-top: 60px;
+    display: flex;
+    width: 225px;
+    height: 65px;
+    border: 1px solid var(--sc);
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    color: var(--sc);
+    transition: all 0.3s ease;
+}
+
+.main_button:hover {
+    color: var(--ffc);
+    background: var(--sc);
+}
+
+/* REPRODUCT (карточки и переключатели) */
+.reproduct_section {
+    margin-top: 70px;
+}
+
+.reproduct_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reproduct_text {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 44px;
+    text-overflow: ellipsis;
+    color: var(--tc);
+}
+
+.reproduct_btn_swipe {
+    display: flex;
+    gap: 0 30px;
+}
+
+.reproduct_button {
+    padding: 10px 20px;
+    background: var(--sxc);
+    border-radius: 20px;
+    color: var(--tc);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    transition: all 0.3s ease;
+}
+
+.reproduct_button:hover:not(.reproduct_button-active) {
+    color: var(--sxc);
+    background: var(--sc);
+}
+
+.reproduct_button-active {
+    background: var(--svc);
+    color: var(--ffc);
+}
+
+.reproduct_block {
+    display: none;
+    gap: 30px;
+}
+
+.reproduct_block-active {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.reproduct_block-active {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Карточка — вертикальный флекс, чтобы элементы растягивались по ширине */
+.reproduct_block_full {
+    background: var(--fc);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    padding-bottom: 30px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Картинка — не ломает карточку */
+.reproduct_block_full>img {
+    width: auto;
+    height: 380px;
+    object-fit: cover;
+    min-height: 0;
+}
+
+/* Автор, название, дата, цена */
+.reproduct_author {
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    color: var(--fc);
+}
+
+.reproduct_name {
+    padding-top: 10px;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 35px;
+    color: var(--tc);
+    /* по умолчанию — высота не фиксирована, line-clamp добавим в адаптиве */
+}
+
+.reproduct_lithography {
+    padding-top: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    color: var(--tc);
+}
+
+.reproduct_price {
+    padding-top: 10px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    color: var(--sc);
+    margin-bottom: 15px;
+}
+
+/* Кнопка в карточке — гибкая */
+.reproduct_btn {
+    width: 310px;
+    height: 65px;
+    border: 1px solid var(--sc);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    color: var(--sc);
+    transition: all 0.3s ease;
+    background: transparent;
+    cursor: pointer;
+}
+
+.reproduct_btn:hover {
+    color: var(--ffc);
+    background: var(--sc);
+}
+
+.reproduct_content {
+    margin-top: 30px;
+}
+
+/* COLLECTION */
+.collection_section {
+    background-image: url(img/foot.webp);
+    margin-top: 70px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.collection {
+    padding: 70px 0;
+}
+
+.col_logo_title {
+    display: flex;
+    gap: 20px;
+}
+
+.col_logo {
+    max-width: 80px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%;
+}
+
+.col_title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 80px;
+    color: var(--ffc);
+}
+
+.col_subtitle {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    color: var(--ffc);
+    max-width: 560px;
+}
+
+/* col link */
+.col_link {
+    display: inline-block;
+    margin-top: 60px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    color: var(--tc);
+    background: #eedb6d;
+    padding: 21px 60px;
+    transition: background-color 0.3s ease;
+}
+
+.col_link:hover {
+    background: #faeb97;
+}
+
+/* COMMAND */
+.command_section {
+    padding: 70px 0;
+}
+
+.command {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.command_img {
+    max-width: 430px;
+    max-height: 430px;
+}
+
+.command_right {
+    max-width: 635px;
+    width: 100%;
+}
+
+.command_title {
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 42px;
+    color: var(--tc);
+}
+
+.command_subtitle {
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    color: var(--tc);
+}
+
+.command_people_image {
+    display: flex;
+    padding-top: 20px;
+    gap: 25px;
+}
+
+.people_img {
+    max-width: 80px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%;
+}
+
+/* FEEDBACK */
+.feedback_title {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 40px;
+    color: var(--tc);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.feedback_input {
+    width: 100%;
+    margin: 15px 0;
+    border: 1px solid var(--sc);
+    transition: all 0.3s ease;
+}
+
+label {
+    display: none;
+}
+
+.feedback_input_text {
+    padding: 14px 18px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--tc);
+    background: var(--ffc);
+    border-radius: 8px;
+}
+
+.feedback_input_text::placeholder {
+    color: var(--ftc);
+}
+
+.feedback_input_text:focus {
+    border-color: var(--svc);
+    background: var(--ffc);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(89, 141, 102, 0.25);
+}
+
+.feedback_input_text:hover {
+    background: var(--fc);
+}
+
+.feedback_input_submit {
+    padding: 16px 28px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--sc);
+    background: var(--sc);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.feedback_input_submit:hover {
+    background: var(--svc);
+    color: var(--ffc);
+}
+
+.feedback_input_submit:active {
+    background: var(--svc);
+    color: var(--ffc);
+    transform: translateY(2px);
+}
+
+/* FOOTER */
+.footer_section {
+    background: var(--fc);
+}
+
+.footer {
+    padding: 23px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer_logo_number {
+    max-width: 180px;
+    width: 100%;
+}
+
+.number {
+    padding-top: 35px;
+}
+
+.phone {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    color: var(--tc);
+}
+
+.name {
+    padding-top: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    color: var(--ftc);
+}
+
+.footer_nav_list {
+    display: flex;
+    gap: 60px;
+}
+
+.footer_nav_item {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_nav_item .reproduct_button {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    color: var(--ftc);
+    padding: 0;
+    padding-bottom: 6px;
+    background: transparent;
+}
+
+.footer_nav_item .reproduct_button-active {
+    background: transparent;
+}
+
+.footer_nav_item .reproduct_button:hover {
+    background: transparent;
+}
+
+.footer_nav_link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    color: var(--ftc);
+}
+
+.footer_nav_link:hover {
+    color: var(--ftc);
+}
+
+.footer_nav_link:not(:last-child) {
+    padding-bottom: 6px;
+}
+
+.footer_nav_social {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    width: 100%;
+}
+
+.footer_social_icon {
+    display: flex;
+    gap: 40px;
+}
+
+.footer_social_link {
+    color: var(--tc);
+}
+
+.footer_icon {
+    transition: color 0.3s ease;
+}
+
+.footer_icon path {
+    fill: currentColor;
+}
+
+.footer_icon:hover {
+    color: var(--sc);
+}
+
+.footer_social_text {
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: var(--ftc);
+}
+
+.footer_social_copyright {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: var(--ftc);
+}
+
+.footer_social_reserved {
+    padding-top: 6px;
+}
+
+/* Accessibility & general protections */
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+aside,
+footer,
+header,
+main,
+nav,
+section {
+    display: block;
+}
+
+ul,
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+address {
+    font-style: normal;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button,
+input[type=submit] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+legend {
+    display: block;
+}
+
+/* ============================
+      ADAPTIVE (чистый, единый блок)
+      чек-пойнты: 1440 / 690 / 320
+      (удалены все старые экспериментальные адаптивы)
+      ============================ */
+
+/* Общие защитные правила для адаптива */
+.reproduct_block_full,
+.reproduct_block,
+.reproduct_btn_swipe .reproduct_button,
+.feedback_content,
+.feedback_input,
+.feedback_input_text {
+    min-width: 0;
+}
+
+.reproduct_name,
+.col_subtitle,
+.command_subtitle,
+.footer_nav_link,
+.feedback_input_text {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+
+/* Форма: поля адаптивные */
+.feedback_content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.feedback_input,
+.feedback_input_text,
+.feedback_input_submit {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+/* ============================
+      1440px — ДЕСКТОП (легкая подстройка)
+      ============================ */
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1000px;
+    }
+
+    .main_heading {
+        font-size: 52px;
+        line-height: 60px;
+    }
+
+    .reproduct_block_full {
+        max-width: 320px;
+    }
+}
+
+/* ============================
+   ADAPTIVE: 690px (Tablet / Mobile Large)
+   Строго по макету: вертикальное выравнивание, 
+   одна карточка в ряд, полная ширина изображений.
+   ============================ */
+
+@media (max-width: 690px) {
+
+    /* --- GLOBAL LAYOUT FIXES --- */
+    .container {
+        padding: 0 20px;
+        /* Чуть больше отступа по краям */
+    }
+
+    /* --- HEADER --- */
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    /* Логотип по центру */
+    .logo {
+        justify-content: center;
+    }
+
+    /* Меню превращаем в список по центру (так как нет JS бургера) */
+    .nav_list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 20px;
+        /* Отступы между ссылками */
+    }
+
+    .nav_link {
+        font-size: 18px;
+    }
+
+    /* --- MAIN SECTION --- */
+    .main {
+        flex-direction: column;
+        /* Картинка сверху, текст снизу */
+        gap: 30px;
+        text-align: center;
+        /* Центрируем текст */
+    }
+
+    .main_left,
+    .main_right {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .main_image {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main_heading {
+        font-size: 40px;
+        line-height: 1.1;
+    }
+
+    .main_subtitle {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .main_button {
+        margin: 30px auto 0 auto;
+        /* Центрируем кнопку */
+    }
+
+    /* --- REPRODUCT (Catalog) --- */
+    .reproduct_top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .reproduct_text {
+        font-size: 30px;
+    }
+
+    /* Кнопки фильтров (Франция, Германия...) */
+    .reproduct_btn_swipe {
+        width: 100%;
+        overflow-x: auto;
+        /* Добавляем скролл, если не влезут */
+        padding-bottom: 10px;
+        /* Место для скроллбара */
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    /* Сами карточки товаров */
+    .reproduct_block-active {
+        justify-content: center;
+        /* Центрируем карточки */
+    }
+
+    .reproduct_block_full {
+        max-width: 100%;
+        /* Карточка занимает всю ширину контейнера */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .reproduct_block_full>img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        /* Ограничиваем высоту картинки */
+        object-fit: cover;
+    }
+
+    .reproduct_btn {
+        width: 100%;
+        /* Кнопка "Записаться" во всю ширину */
+    }
+
+    /* --- COLLECTION (Yellow section) --- */
+    .collection {
+        padding: 50px 0;
+    }
+
+    .col_logo_title {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .col_title {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+
+    .col_subtitle {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .col_link {
+        display: block;
+        margin: 40px auto 0 auto;
+        text-align: center;
+        width: fit-content;
+    }
+
+    /* --- COMMAND (Team) --- */
+    .command {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .command_img {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+        /* Ограничиваем ширину фото команды */
+        margin: 0 auto;
+    }
+
+    .command_right {
+        max-width: 100%;
+    }
+
+    .command_title {
+        font-size: 30px;
+    }
+
+    .command_people_image {
+        justify-content: center;
+        /* Центрируем иконки людей */
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer_logo_number {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .number {
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    /* Ссылки в футере перестраиваем */
+    .footer_nav_social {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer_nav_list {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer_nav_item {
+        align-items: center;
+    }
+
+    .footer_social {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ============================
+      320px — МОБИЛЬНЫЕ (Mobile)
+      ============================ */
+@media (max-width: 320px) {
+
+    .container {
+        padding: 0 15px;
+    }
+
+    /* HEADER */
+    .logo_text {
+        font-size: 18px;
+    }
+
+    .nav_list {
+        gap: 12px;
+    }
+
+    /* MAIN */
+    .main_heading {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .main_subtitle {
+        font-size: 16px;
+    }
+
+    .main_button {
+        width: 100%;
+        height: 55px;
+        font-size: 18px;
+    }
+
+    /* REPRODUCT */
+    .reproduct_text {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .reproduct_button {
+        font-size: 12px;
+        padding: 8px 4px;
+        width: 100%;
+    }
+
+    .reproduct_block_full {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .reproduct_block_full>img {
+        min-height: 0;
+        height: auto;
+    }
+
+    /* Название — ровно 3 строки */
+    .reproduct_name {
+        font-size: 20px;
+        line-height: 26px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: calc(26px * 3);
+    }
+
+    .reproduct_price {
+        font-size: 20px;
+    }
+
+    .reproduct_btn {
+        width: 100%;
+        height: 55px;
+        font-size: 18px;
+    }
+
+    /* COLLECTION */
+    .col_title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .col_subtitle {
+        font-size: 16px;
+    }
+
+    /* COMMAND */
+    .command_title {
+        font-size: 28px;
+    }
+
+    .command_subtitle {
+        font-size: 16px;
+    }
+
+    .people_img {
+        max-width: 60px;
+    }
+
+    /* FEEDBACK */
+    .feedback_input_text {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .feedback_input_submit {
+        width: 100%;
+        font-size: 18px;
+        padding: 14px;
+    }
+
+    /* FOOTER */
+    .footer_nav_list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer_social_icon {
+        gap: 20px;
+    }
+}
+
+/* ============================
+      Дополнительная страховка против горизонтального скролла
+      ============================ */
+@media (max-width: 470px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .feedback_input_text {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
