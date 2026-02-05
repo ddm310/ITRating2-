@@ -1,4 +1,3 @@
-/* Цветовые переменные для удобства стилизации */
 :root {
     --fc: #edece1;
     --sc: #b8b176;
@@ -9,7 +8,6 @@
     --svc: #837e3d;
 }
 
-/* Базовые сбросы и единая модель коробки */
 *,
 *::before,
 *::after {
@@ -20,20 +18,17 @@
     border: none;
 }
 
-/* Видимый фокус для клавиатурной навигации */
 *:focus {
     outline: 3px solid var(--sc);
     outline-offset: 3px;
     border-radius: 4px;
 }
 
-/* Глобальные настройки HTML */
 html {
     width: 100%;
     scroll-behavior: smooth;
 }
 
-/* Основные настройки текста и плавного появления */
 body {
     transition: opacity ease-in 0.2s;
     font-family: "Raleway", sans-serif;
@@ -41,7 +36,6 @@ body {
     font-weight: 500;
 }
 
-/* Скрытие контента до полной загрузки */
 body[unresolved] {
     opacity: 0;
     display: block;
@@ -49,24 +43,21 @@ body[unresolved] {
     position: relative;
 }
 
-/* Блокировка скролла при необходимости */
 .scroll-active {
     overflow: hidden;
 }
 
-/* Фон шапки */
 .header_section {
     background: var(--fc);
 }
 
-/* Контейнер с максимальной шириной */
 .container {
     max-width: 1130px;
     padding: 0 10px;
     margin: 0 auto;
 }
 
-/* Основной блок шапки: логотип + меню */
+/* HEADER */
 .header {
     display: flex;
     align-items: center;
@@ -74,14 +65,12 @@ body[unresolved] {
     padding: 33px 0;
 }
 
-/* Логотип: иконка + текст */
 .logo {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-/* Размеры SVG логотипа */
 .logo_img {
     max-width: 35px;
     max-height: 35px;
@@ -89,7 +78,6 @@ body[unresolved] {
     height: 100%;
 }
 
-/* Текст логотипа */
 .logo_text {
     font-size: 20px;
     font-weight: 700;
@@ -97,20 +85,17 @@ body[unresolved] {
     color: var(--sc);
 }
 
-/* Горизонтальное меню */
 .nav_list {
     display: flex;
     align-items: center;
     gap: 60px;
 }
 
-/* Скрытый первый элемент меню */
 .nav_item:first-child {
     display: none;
     z-index: 3;
 }
 
-/* Ссылки меню */
 .nav_link {
     font-size: 20px;
     font-weight: 500;
@@ -120,19 +105,16 @@ body[unresolved] {
     margin-bottom: 5px;
 }
 
-/* Ховер по ссылкам меню */
 .nav_link:hover {
     color: var(--sc);
 }
 
-/* Контейнер кастомного аудиоплеера */
 .audio_player {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Кнопка пуск/пауза */
 .play_audio {
     font-size: 22px;
     background: none;
@@ -142,14 +124,13 @@ body[unresolved] {
     margin-bottom: 5px;
 }
 
-/* Основной блок главной секции */
+/* MAIN */
 .main {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-/* Заголовок главного блока */
 .main_heading {
     font-size: 60px;
     font-weight: 500;
@@ -157,12 +138,10 @@ body[unresolved] {
     color: var(--tc);
 }
 
-/* Цвет выделенного слова */
 .main_heading span {
     color: var(--sc);
 }
 
-/* Подзаголовок */
 .main_subtitle {
     font-size: 18px;
     font-weight: 500;
@@ -171,7 +150,6 @@ body[unresolved] {
     color: var(--ftc);
 }
 
-/* Кнопка в главной секции */
 .main_button {
     margin-top: 60px;
     display: flex;
@@ -187,25 +165,22 @@ body[unresolved] {
     transition: all 0.3s ease;
 }
 
-/* Ховер кнопки */
 .main_button:hover {
     color: var(--ffc);
     background: var(--sc);
 }
 
-/* Отступ перед секцией экскурсий */
+/* excursion (карточки и переключатели) */
 .excursion_section {
     margin-top: 70px;
 }
 
-/* Верхняя часть секции экскурсий: заголовок + кнопки */
 .excursion_top {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Заголовок секции экскурсий */
 .excursion_text {
     font-size: 40px;
     font-weight: 500;
@@ -214,13 +189,11 @@ body[unresolved] {
     color: var(--tc);
 }
 
-/* Контейнер кнопок фильтра */
 .excursion_btn_swipe {
     display: flex;
     gap: 0 30px;
 }
 
-/* Кнопки фильтра */
 .excursion_button {
     padding: 10px 20px;
     background: var(--sxc);
@@ -232,34 +205,33 @@ body[unresolved] {
     transition: all 0.3s ease;
 }
 
-/* Ховер кнопок фильтра */
 .excursion_button:hover:not(.excursion_button-active) {
     color: var(--sxc);
     background: var(--sc);
 }
 
-/* Активная кнопка фильтра */
 .excursion_button-active {
     background: var(--svc);
     color: var(--ffc);
 }
 
-/* Контейнер блоков экскурсий */
 .excursion_block {
     display: none;
     gap: 30px;
 }
 
-/* Активный блок экскурсий */
 .excursion_block-active {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 30px;
+}
+
+.excursion_block-active {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Карточка экскурсии */
+/* Карточка — вертикальный флекс, чтобы элементы растягивались по ширине */
 .excursion_block_full {
     background: var(--fc);
     display: flex;
@@ -273,7 +245,7 @@ body[unresolved] {
     box-sizing: border-box;
 }
 
-/* Изображение экскурсии */
+/* Картинка — не ломает карточку */
 .excursion_block_full>img {
     width: auto;
     height: 380px;
@@ -281,7 +253,7 @@ body[unresolved] {
     min-height: 0;
 }
 
-/* Автор экскурсии */
+/* Автор, название, дата, цена */
 .excursion_author {
     padding-top: 20px;
     font-size: 18px;
@@ -290,16 +262,15 @@ body[unresolved] {
     color: var(--fc);
 }
 
-/* Название экскурсии */
 .excursion_name {
     padding-top: 10px;
     font-size: 25px;
     font-weight: 500;
     line-height: 35px;
     color: var(--tc);
+    /* по умолчанию — высота не фиксирована, line-clamp добавим в адаптиве */
 }
 
-/* Тип экскурсии */
 .excursion_lithography {
     padding-top: 8px;
     font-size: 18px;
@@ -308,7 +279,6 @@ body[unresolved] {
     color: var(--tc);
 }
 
-/* Цена экскурсии */
 .excursion_price {
     padding-top: 10px;
     font-size: 24px;
@@ -318,7 +288,7 @@ body[unresolved] {
     margin-bottom: 15px;
 }
 
-/* Кнопка "Записаться" */
+/* Кнопка в карточке — гибкая */
 .excursion_btn {
     width: 310px;
     height: 65px;
@@ -332,18 +302,16 @@ body[unresolved] {
     cursor: pointer;
 }
 
-/* Ховер кнопки */
 .excursion_btn:hover {
     color: var(--ffc);
     background: var(--sc);
 }
 
-/* Отступ перед контентом */
 .excursion_content {
     margin-top: 30px;
 }
 
-/* Секция коллекции с фоновым изображением */
+/* COLLECTION */
 .collection_section {
     background-image: url(img/foot.webp);
     margin-top: 70px;
@@ -351,18 +319,15 @@ body[unresolved] {
     background-size: cover;
 }
 
-/* Внутренние отступы секции */
 .collection {
     padding: 70px 0;
 }
 
-/* Логотип и заголовок коллекции */
 .col_logo_title {
     display: flex;
     gap: 20px;
 }
 
-/* Размеры логотипа коллекции */
 .col_logo {
     max-width: 80px;
     max-height: 80px;
@@ -370,7 +335,6 @@ body[unresolved] {
     height: 100%;
 }
 
-/* Заголовок коллекции */
 .col_title {
     font-size: 40px;
     font-weight: 500;
@@ -378,7 +342,6 @@ body[unresolved] {
     color: var(--ffc);
 }
 
-/* Подзаголовок коллекции */
 .col_subtitle {
     margin-top: 20px;
     font-size: 18px;
@@ -388,7 +351,7 @@ body[unresolved] {
     max-width: 560px;
 }
 
-/* Кнопка перехода в коллекцию */
+/* col link */
 .col_link {
     display: inline-block;
     margin-top: 60px;
@@ -401,17 +364,15 @@ body[unresolved] {
     transition: background-color 0.3s ease;
 }
 
-/* Ховер кнопки коллекции */
 .col_link:hover {
     background: #faeb97;
 }
 
-/* Секция команды */
+/* COMMAND */
 .command_section {
     padding: 70px 0;
 }
 
-/* Основной блок команды: фото + текст */
 .command {
     display: flex;
     justify-content: space-between;
@@ -419,19 +380,16 @@ body[unresolved] {
     gap: 30px;
 }
 
-/* Фото команды */
 .command_img {
     max-width: 430px;
     max-height: 430px;
 }
 
-/* Правая часть блока команды */
 .command_right {
     max-width: 635px;
     width: 100%;
 }
 
-/* Заголовок секции команды */
 .command_title {
     font-size: 38px;
     font-weight: 500;
@@ -439,7 +397,6 @@ body[unresolved] {
     color: var(--tc);
 }
 
-/* Подзаголовок секции команды */
 .command_subtitle {
     padding-top: 20px;
     font-size: 18px;
@@ -448,14 +405,12 @@ body[unresolved] {
     color: var(--tc);
 }
 
-/* Контейнер фотографий участников */
 .command_people_image {
     display: flex;
     padding-top: 20px;
     gap: 25px;
 }
 
-/* Фото участников */
 .people_img {
     max-width: 80px;
     max-height: 80px;
@@ -463,7 +418,7 @@ body[unresolved] {
     height: 100%;
 }
 
-/* Заголовок формы обратной связи */
+/* FEEDBACK */
 .feedback_title {
     font-size: 40px;
     font-weight: 500;
@@ -473,7 +428,6 @@ body[unresolved] {
     margin-bottom: 10px;
 }
 
-/* Контейнер полей формы */
 .feedback_input {
     width: 100%;
     margin: 15px 0;
@@ -481,12 +435,10 @@ body[unresolved] {
     transition: all 0.3s ease;
 }
 
-/* Скрытие label для визуальной чистоты */
 label {
     display: none;
 }
 
-/* Поля ввода формы */
 .feedback_input_text {
     padding: 14px 18px;
     font-size: 18px;
@@ -496,12 +448,10 @@ label {
     border-radius: 8px;
 }
 
-/* Цвет placeholder */
 .feedback_input_text::placeholder {
     color: var(--ftc);
 }
 
-/* Фокус на поле ввода */
 .feedback_input_text:focus {
     border-color: var(--svc);
     background: var(--ffc);
@@ -509,12 +459,10 @@ label {
     box-shadow: 0 0 0 3px rgba(89, 141, 102, 0.25);
 }
 
-/* Ховер по полю ввода */
 .feedback_input_text:hover {
     background: var(--fc);
 }
 
-/* Кнопка отправки формы */
 .feedback_input_submit {
     padding: 16px 28px;
     margin-bottom: 30px;
@@ -526,25 +474,22 @@ label {
     cursor: pointer;
 }
 
-/* Ховер кнопки отправки */
 .feedback_input_submit:hover {
     background: var(--svc);
     color: var(--ffc);
 }
 
-/* Нажатие кнопки отправки */
 .feedback_input_submit:active {
     background: var(--svc);
     color: var(--ffc);
     transform: translateY(2px);
 }
 
-/* Футер сайта */
+/* FOOTER */
 .footer_section {
     background: var(--fc);
 }
 
-/* Основной блок футера */
 .footer {
     padding: 23px 0;
     display: flex;
@@ -552,18 +497,15 @@ label {
     justify-content: space-between;
 }
 
-/* Логотип + номер телефона */
 .footer_logo_number {
     max-width: 180px;
     width: 100%;
 }
 
-/* Контейнер номера телефона */
 .number {
     padding-top: 35px;
 }
 
-/* Телефон */
 .phone {
     font-size: 20px;
     font-weight: 500;
@@ -571,7 +513,6 @@ label {
     color: var(--tc);
 }
 
-/* Имя владельца номера */
 .name {
     padding-top: 8px;
     font-size: 18px;
@@ -580,19 +521,16 @@ label {
     color: var(--ftc);
 }
 
-/* Навигация в футере */
 .footer_nav_list {
     display: flex;
     gap: 60px;
 }
 
-/* Колонка навигации */
 .footer_nav_item {
     display: flex;
     flex-direction: column;
 }
 
-/* Кнопки в футере (стилизованные как ссылки) */
 .footer_nav_item .excursion_button {
     font-size: 18px;
     font-weight: 500;
@@ -603,17 +541,14 @@ label {
     background: transparent;
 }
 
-/* Активная кнопка в футере */
 .footer_nav_item .excursion_button-active {
     background: transparent;
 }
 
-/* Ховер по кнопкам футера */
 .footer_nav_item .excursion_button:hover {
     background: transparent;
 }
 
-/* Ссылки футера */
 .footer_nav_link {
     font-size: 18px;
     font-weight: 500;
@@ -621,17 +556,14 @@ label {
     color: var(--ftc);
 }
 
-/* Ховер по ссылкам футера */
 .footer_nav_link:hover {
     color: var(--ftc);
 }
 
-/* Отступы между ссылками */
 .footer_nav_link:not(:last-child) {
     padding-bottom: 6px;
 }
 
-/* Контейнер соцсетей */
 .footer_nav_social {
     display: flex;
     justify-content: space-between;
@@ -639,33 +571,27 @@ label {
     width: 100%;
 }
 
-/* Иконки соцсетей */
 .footer_social_icon {
     display: flex;
     gap: 40px;
 }
 
-/* Ссылка соцсети */
 .footer_social_link {
     color: var(--tc);
 }
 
-/* Иконка соцсети */
 .footer_icon {
     transition: color 0.3s ease;
 }
 
-/* Цвет SVG через currentColor */
 .footer_icon path {
     fill: currentColor;
 }
 
-/* Ховер по иконке */
 .footer_icon:hover {
     color: var(--sc);
 }
 
-/* Текст под соцсетями */
 .footer_social_text {
     padding-top: 10px;
     font-size: 12px;
@@ -674,7 +600,6 @@ label {
     color: var(--ftc);
 }
 
-/* Копирайт */
 .footer_social_copyright {
     font-size: 12px;
     font-weight: 500;
@@ -682,12 +607,92 @@ label {
     color: var(--ftc);
 }
 
-/* Отступ копирайта */
 .footer_social_reserved {
     padding-top: 6px;
 }
 
-/* Адаптив: общие правила для предотвращения переполнения */
+/* Accessibility & general protections */
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+aside,
+footer,
+header,
+main,
+nav,
+section {
+    display: block;
+}
+
+ul,
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+address {
+    font-style: normal;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button,
+input[type=submit] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+legend {
+    display: block;
+}
+
+/* ============================
+      ADAPTIVE (чистый, единый блок)
+      чек-пойнты: 1440 / 690 / 320
+      (удалены все старые экспериментальные адаптивы)
+      ============================ */
+
+/* Общие защитные правила для адаптива */
 .excursion_block_full,
 .excursion_block,
 .excursion_btn_swipe .excursion_button,
@@ -697,7 +702,6 @@ label {
     min-width: 0;
 }
 
-/* Перенос длинных слов в разных блоках */
 .excursion_name,
 .col_subtitle,
 .command_subtitle,
@@ -707,7 +711,8 @@ label {
     overflow-wrap: break-word;
 }
 
-/* Адаптив: форма обратной связи */
+
+/* Форма: поля адаптивные */
 .feedback_content {
     display: flex;
     flex-direction: column;
@@ -717,7 +722,6 @@ label {
     box-sizing: border-box;
 }
 
-/* Поля формы на всю ширину */
 .feedback_input,
 .feedback_input_text,
 .feedback_input_submit {
@@ -727,7 +731,9 @@ label {
     min-width: 0;
 }
 
-/* Адаптив 1440px — небольшая подстройка ширины */
+/* ============================
+      1440px — ДЕСКТОП (легкая подстройка)
+      ============================ */
 @media (max-width: 1440px) {
     .container {
         max-width: 1000px;
@@ -743,15 +749,21 @@ label {
     }
 }
 
-/* Адаптив 690px — перестройка под планшеты */
+/* ============================
+   ADAPTIVE: 690px (Tablet / Mobile Large)
+   Строго по макету: вертикальное выравнивание, 
+   одна карточка в ряд, полная ширина изображений.
+   ============================ */
+
 @media (max-width: 690px) {
 
-    /* Контейнер с увеличенными боковыми отступами */
+    /* --- GLOBAL LAYOUT FIXES --- */
     .container {
         padding: 0 20px;
+        /* Чуть больше отступа по краям */
     }
 
-    /* Шапка: элементы в колонку */
+    /* --- HEADER --- */
     .header {
         flex-direction: column;
         gap: 20px;
@@ -763,22 +775,25 @@ label {
         justify-content: center;
     }
 
-    /* Меню по центру, с переносом */
+    /* Меню превращаем в список по центру (так как нет JS бургера) */
     .nav_list {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px 20px;
+        /* Отступы между ссылками */
     }
 
     .nav_link {
         font-size: 18px;
     }
 
-    /* Главный блок: картинка сверху */
+    /* --- MAIN SECTION --- */
     .main {
         flex-direction: column;
+        /* Картинка сверху, текст снизу */
         gap: 30px;
         text-align: center;
+        /* Центрируем текст */
     }
 
     .main_left,
@@ -804,9 +819,10 @@ label {
 
     .main_button {
         margin: 30px auto 0 auto;
+        /* Центрируем кнопку */
     }
 
-    /* Заголовок + кнопки фильтра в колонку */
+    /* --- excursion (Catalog) --- */
     .excursion_top {
         flex-direction: column;
         align-items: flex-start;
@@ -817,22 +833,26 @@ label {
         font-size: 30px;
     }
 
-    /* Кнопки фильтра со скроллом */
+    /* Кнопки фильтров (Франция, Германия...) */
     .excursion_btn_swipe {
         width: 100%;
         overflow-x: auto;
+        /* Добавляем скролл, если не влезут */
         padding-bottom: 10px;
+        /* Место для скроллбара */
         justify-content: flex-start;
         gap: 10px;
     }
 
-    /* Карточки экскурсий по одной в ряд */
+    /* Сами карточки товаров */
     .excursion_block-active {
         justify-content: center;
+        /* Центрируем карточки */
     }
 
     .excursion_block_full {
         max-width: 100%;
+        /* Карточка занимает всю ширину контейнера */
         width: 100%;
         margin-bottom: 20px;
     }
@@ -841,14 +861,16 @@ label {
         width: 100%;
         height: auto;
         max-height: 400px;
+        /* Ограничиваем высоту картинки */
         object-fit: cover;
     }
 
     .excursion_btn {
         width: 100%;
+        /* Кнопка "Записаться" во всю ширину */
     }
 
-    /* Коллекция: центрирование */
+    /* --- COLLECTION (Yellow section) --- */
     .collection {
         padding: 50px 0;
     }
@@ -876,7 +898,7 @@ label {
         width: fit-content;
     }
 
-    /* Команда: картинка сверху */
+    /* --- COMMAND (Team) --- */
     .command {
         flex-direction: column;
         text-align: center;
@@ -886,6 +908,7 @@ label {
         width: 100%;
         height: auto;
         max-width: 500px;
+        /* Ограничиваем ширину фото команды */
         margin: 0 auto;
     }
 
@@ -899,9 +922,10 @@ label {
 
     .command_people_image {
         justify-content: center;
+        /* Центрируем иконки людей */
     }
 
-    /* Футер: всё в колонку */
+    /* --- FOOTER --- */
     .footer {
         flex-direction: column;
         gap: 30px;
@@ -920,6 +944,7 @@ label {
         text-align: center;
     }
 
+    /* Ссылки в футере перестраиваем */
     .footer_nav_social {
         flex-direction: column;
         align-items: center;
@@ -943,13 +968,16 @@ label {
     }
 }
 
-/* Адаптив 320px — мелкие экраны */
+/* ============================
+      320px — МОБИЛЬНЫЕ (Mobile)
+      ============================ */
 @media (max-width: 320px) {
 
     .container {
         padding: 0 15px;
     }
 
+    /* HEADER */
     .logo_text {
         font-size: 18px;
     }
@@ -958,6 +986,7 @@ label {
         gap: 12px;
     }
 
+    /* MAIN */
     .main_heading {
         font-size: 32px;
         line-height: 38px;
@@ -973,6 +1002,7 @@ label {
         font-size: 18px;
     }
 
+    /* excursion */
     .excursion_text {
         font-size: 32px;
         text-align: center;
@@ -994,6 +1024,7 @@ label {
         height: auto;
     }
 
+    /* Название — ровно 3 строки */
     .excursion_name {
         font-size: 20px;
         line-height: 26px;
@@ -1014,6 +1045,7 @@ label {
         font-size: 18px;
     }
 
+    /* COLLECTION */
     .col_title {
         font-size: 28px;
         line-height: 34px;
@@ -1023,6 +1055,7 @@ label {
         font-size: 16px;
     }
 
+    /* COMMAND */
     .command_title {
         font-size: 28px;
     }
@@ -1035,6 +1068,7 @@ label {
         max-width: 60px;
     }
 
+    /* FEEDBACK */
     .feedback_input_text {
         font-size: 16px;
         padding: 12px;
@@ -1046,6 +1080,7 @@ label {
         padding: 14px;
     }
 
+    /* FOOTER */
     .footer_nav_list {
         flex-direction: column;
         gap: 20px;
@@ -1056,7 +1091,9 @@ label {
     }
 }
 
-/* Адаптив 470px — защита от горизонтального скролла */
+/* ============================
+      Дополнительная страховка против горизонтального скролла
+      ============================ */
 @media (max-width: 470px) {
     .container {
         padding-left: 15px;
@@ -1069,7 +1106,6 @@ label {
     }
 }
 
-/* Анимация появления блоков */
 @keyframes fadeIn {
     from {
         opacity: 0;
