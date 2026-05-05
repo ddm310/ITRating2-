@@ -204,7 +204,7 @@ const landmarks = languageIsRus ? [
     }
 ];
 
-let questions = shuffle(languageIsRus == 'RUS' ? [
+let questions = shuffle(languageIsRus ? [
     {
         text: 'В каком году был построен (восстановлен) объект "object"?',
         typeOfQuestion: "name",
@@ -326,7 +326,7 @@ const quizCorrectAnswersCount = document.querySelector('.quiz_correct_answers_co
 const quizWrongAnswersCount = document.querySelector('.quiz_wrong_answers_count');
 const quizAnsweredQuestionsCount = document.querySelector('.quiz_answered_questions_count');
 const quizNotAnsweredQuestionsCount = document.querySelector('.quiz_not_answered_questions_count');
-const exceptions = languageIsRus == 'RUS' ? {
+const exceptions = languageIsRus ? {
     "1997 год": ["Французская скрипка в Витебске", "Дом-музей Марка Шагала"],
     "38 м": ["Железнодорожный вокзал Витебска", "Витебский краеведческий музей"],
     "Иван Казак": ["Золотая рыбка с ключиком", "Памятник «Витебский великан»"]
