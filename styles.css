@@ -1439,6 +1439,14 @@ legend {
         width: fit-content;
     }
 
+    .booking_flex_div {
+        flex-direction: column;
+    }
+
+    .booking_input_not_text {
+        width: 100%;
+    }
+
     /* --- team (Team) --- */
     .team {
         flex-direction: column;
