@@ -6,11 +6,245 @@ if (!localStorage.getItem('language')) {
     localStorage.setItem('language', 'RUS');
 }
 
+const russian = localStorage.getItem('language') == 'RUS';
+
+// #region Functions
+// Функция для валидации полей
+function validate(name, email, subject, message, people) {
+    // Проверка ФИО
+    const fioParts = name.split(/\s+/);
+    if (fioParts.length !== 3 || fioParts.some(word => word.length < 2)) {
+        return russian ? "Введите корректное ФИО." : "Увядзіце карэктнае ПІБ.";
+    }
+
+    // Проверка Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return russian ? "Введите корректный email." : "Увядзіце карэктны email.";
+    }
+
+    // Проверка заголовка
+    if (subject.length < 5) {
+        return russian ? "Заголовок должен быть не короче 5 символов." : "Загаловак павінен быць не карацейшы за 5 сімвалаў.";
+    }
+
+    // Проверка и сообщения
+    if (message && message.length < 15) {
+        return russian ? "Сообщение должно быть не короче 15 символов." : "Паведамленне павінна быць не карацей 15 сімвалаў.";
+    }
+
+    if (people && people <= 0) {
+        return russian ? "Количество людей должно превышать 0." : "Колькасць людзей мусіць перавышаць 0.";
+    }
+
+    return false;
+}
+
+// Функция отправки сообщения в Telegram-бот
+function sendMessage(text, nameOfPage) {
+    fetch(`https://api.telegram.org/bot8233373413:AAFXJFUEJuabD4IuGcuvyz4SPRFp0_uIapY/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            chat_id: "7478877616",
+            text: text
+        })
+    })
+        .then(() => {
+            alert(russian ? "Сообщение отправлено! Мы скоро свяжемся с вами." : "Паведамленне адпраўлена! Мы хутка звяжамся з вамі.");
+
+            // Очистка полей формы
+            document.querySelector(`.${nameOfPage}_content`).reset();
+            document.querySelector('.fn').focus();
+        })
+        .catch(() => {
+            alert(russian ? "Ошибка отправки. Попробуйте связаться позже." : "Памылка адпраўкі. Паспрабуйце сувязацца пазней.");
+            document.querySelector('#submit').focus();
+        });
+}
+
+// #endregion
+
+// #region Audio
+const audio = document.querySelector('.audio');
+
+// Функция для запуска / выключения аудио
+function audioPlay(bool) {
+    if (bool) {
+        audio.play().catch(e => {
+            console.error((russian ? "Произошла ошибка при запуске или паузы аудио. Лог ошибки: " : "Адбылася памылка пры запуску ці паўзы аўдыё. Лог памылкі: ") + e);
+            document.querySelector(".play_audio span").textContent = "▶";
+            document.querySelector(".play_audio").ariaLabel = russian ? "Воспроизвести музыку" : "Прайграць музыку";
+        });
+        document.querySelector(".play_audio span").textContent = "▌▌";
+        document.querySelector(".play_audio").ariaLabel = russian ? "Поставить музыку на паузу" : "Паставіць музыку на паўзу";
+    } else {
+        audio.pause();
+        document.querySelector(".play_audio span").textContent = "▶";
+        document.querySelector(".play_audio").ariaLabel = russian ? "Воспроизвести музыку" : "Прайграць музыку";
+    }
+}
+
+// Автозапуск аудио при первом клике пользователя
+document.addEventListener('click', () => {
+    audioPlay(audio.paused);
+}, { once: true }); // выполнится один раз
+
+// Управление кастомным аудиоплеером (пуск/пауза)
+document.querySelector(".play_audio").addEventListener("click", () => {
+    if (audio.paused) {
+        audioPlay(true);
+    } else {
+        audioPlay(false);
+    }
+});
+
+// Автоповтор аудио после завершения
+document.querySelector(".audio").addEventListener("ended", () => {
+    audio.currentTime = 0;
+    audioPlay(true);
+});
+// #endregion
+
+// #region Star
+
+if (!localStorage.getItem('starsCollected')) {
+    localStorage.setItem('starsCollected', 0)
+}
+
+const star = document.querySelector('.secret_star');
+
+if (localStorage.getItem('cheat')) {
+    alert(russian ? 'Соберите все звёзды, прежде чем играть в секретную мини-игру.' : 'Збярыце ўсе зоркі, перш чым гуляць у сакрэтную міні-гульню.');
+    localStorage.removeItem('cheat');
+}
+
+if (localStorage.getItem('cleared')) {
+    alert(russian ? 'Звёзды обнулены, собирайте их заново!' : 'Зоркі абнулены, зьбірайце іх нанова!');
+    localStorage.removeItem('cleared');
+}
+
+if (star) {
+
+    if (localStorage.getItem(`${star.dataset.page}`) === 'true') {
+        star.classList.add('secret_star-collected');
+    }
+
+    function minigame() {
+        if (localStorage.getItem('starsCollected') === '5' && !document.querySelector('[href="minigame.html"]')) {
+            const li = document.createElement('li');
+            li.classList.add('nav_item');
+            const a = document.createElement('a');
+            a.textContent = russian ? 'Мини-игра' : 'Міні-гульня';
+            a.href = 'minigame.html';
+            a.classList.add('nav_link');
+            li.appendChild(a);
+            document.querySelector('.main_nav').appendChild(li);
+        }
+    }
+
+    star.addEventListener('click', () => {
+        if (star.classList.contains('secret_star-clicked')) { return; }
+        star.classList.add('secret_star-clicked');
+        localStorage.setItem(`${star.dataset.page}`, 'true');
+        localStorage.setItem('starsCollected', Number(localStorage.getItem('starsCollected')) + 1);
+        minigame();
+    })
+}
+// #endregion
+
+// #region Telegram
+if (window.location.pathname.includes('feedback.html')) {
+    document.querySelector(".feedback_input_submit").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const name = document.querySelector("#f_fn").value.trim();
+        const email = document.querySelector("#f_email").value.trim();
+        const subject = document.querySelector("#topic").value.trim();
+        const message = document.querySelector("#mess").value.trim();
+        const validationResult = validate(name, email, subject, message, undefined);
+
+        if ([name, subject, email, message].some(x => x === '')) {
+            alert(russian ? 'Все поля должны быть заполнены.' : 'Усе палі павінны быць запоўненыя.');
+            return;
+        } else if (validationResult) {
+            alert(validationResult);
+            return;
+        }
+        // Формирование текста для Telegram
+        const text =
+            (russian ? "Обратная связь!\n" : 'Обратная связь (BEL)!\n') +
+            "\nИмя: " + name +
+            "\nEmail: " + email +
+            "\nЗаголовок: " + subject +
+            "\nСообщение:\n" + message;
+
+        sendMessage(text, 'feedback');
+    })
+}
+
+if (window.location.pathname.includes('booking.html')) {
+    document.querySelector(".booking_input_submit").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const name = document.querySelector("#b_fn").value.trim();
+        const email = document.querySelector("#b_email").value.trim();
+        const excursion = document.querySelector("#excursion").value.trim();
+        const notes = document.querySelector("#notes").value.trim();
+        const people = document.querySelector("#people").value.trim();
+        const payingMethod = document.querySelector("#paying_method").value.trim();
+        const validationResult = validate(name, email, excursion, undefined, people);
+
+        if ([name, excursion, email, people, payingMethod].some(x => x === '')) {
+            alert('Все поля кроме примечаний должны быть заполнены.');
+            return;
+        } else if (validationResult) {
+            alert(validationResult);
+            return;
+        }
+
+
+        // Формирование текста для Telegram
+        const text =
+            "Запись на экскурсию!\n" +
+            "\nИмя: " + name +
+            "\nEmail: " + email +
+            "\nНазвание экскурсии: " + excursion +
+            "\nКол-во людей: " + people +
+            "\nСпособ оплаты: " + payingMethod +
+            (notes ? "\nПримечания: " + notes : "\nПримечаний нет");
+
+
+        sendMessage(text, 'booking', false);
+    })
+}
+
+// #endregion
+
+// Проверяем, на какой странице пользователь
+if (window.location.pathname.includes('booking.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Получаем параметры из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const excursionName = urlParams.get('excursion');
+
+        // Если параметр есть, заполняем поле темы
+        if (excursionName) {
+            const excursionInput = document.querySelector('[name="excursion"]');
+            excursionInput.value = (russian ? 'Запись на экскурсию ' : 'Запіс на экскурсію ') + `"${excursionName}"`;
+            excursionInput.readOnly = true;
+        }
+
+
+    });
+}
+
 const languageButton = document.querySelector('.nav_button');
-const LS_language = localStorage.getItem('language');
 
 languageButton.addEventListener('click', () => {
-    if (LS_language == 'BEL') {
+    currentLang = localStorage.getItem('language');
+    if (currentLang == 'BEL') {
         languageButton.textContent = 'BEL';
         languageButton.setAttribute('aria-label', 'Переключение языка на белорусский');
         localStorage.setItem('language', 'RUS');
@@ -22,252 +256,7 @@ languageButton.addEventListener('click', () => {
     location.reload();
 })
 
-if (LS_language == 'RUS') {
-
-    // Проверяем, на какой странице пользователь
-    if (window.location.pathname.includes('booking.html')) {
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Получаем параметры из URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const excursionName = urlParams.get('excursion');
-
-            // Если параметр есть, заполняем поле темы
-            if (excursionName) {
-                const excursionInput = document.querySelector('[name="excursion"]');
-                excursionInput.value = `Запись на экскурсию "${excursionName}"`;
-                excursionInput.readOnly = true;
-            }
-
-
-        });
-    }
-
-    // #region Star
-
-    if (!localStorage.getItem('starsCollected')) {
-        localStorage.setItem('starsCollected', 0)
-    }
-
-    const star = document.querySelector('.secret_star');
-
-    if (localStorage.getItem('cheat')) {
-        alert('Соберите все звёзды, прежде чем играть в секретную мини-игру.');
-        localStorage.removeItem('cheat');
-    }
-
-    if (localStorage.getItem('cleared')) {
-        alert('Звёзды обнулены, собирайте их заново!');
-        localStorage.removeItem('cleared');
-    }
-
-    if (star) {
-
-        if (localStorage.getItem(`${star.dataset.page}`) === 'true') {
-            star.classList.add('secret_star-collected');
-        }
-
-        console.log(localStorage);
-
-        if (localStorage.getItem('starsCollected') === '5' && !document.querySelector('[href="minigame.html"]')) {
-            const li = document.createElement('li');
-            li.classList.add('nav_item');
-            const a = document.createElement('a');
-            a.textContent = 'Мини-игра';
-            a.href = 'minigame.html';
-            a.classList.add('nav_link');
-            li.appendChild(a);
-            document.querySelector('.main_nav').appendChild(li);
-        }
-
-        star.addEventListener('click', () => {
-            if (star.classList.contains('secret_star-clicked')) { return; }
-            star.classList.add('secret_star-clicked');
-            localStorage.setItem(`${star.dataset.page}`, 'true');
-            localStorage.setItem('starsCollected', Number(localStorage.getItem('starsCollected')) + 1);
-            if (localStorage.getItem('starsCollected') === '5' && !document.querySelector('[href="minigame.html"]')) {
-                const li = document.createElement('li');
-                li.classList.add('nav_item');
-                const a = document.createElement('a');
-                a.textContent = 'Мини-игра';
-                a.href = 'minigame.html';
-                a.classList.add('nav_link');
-                li.appendChild(a);
-                document.querySelector('.main_nav').appendChild(li);
-            }
-        })
-    }
-    // #endregion
-
-
-    // #region Audio
-    const audio = document.querySelector('.audio');
-
-    // Функция для запуска / выключения аудио
-    function audioPlay(bool) {
-        if (bool) {
-            audio.play().catch(e => {
-                console.error(`Произошла ошибка при запуске или паузы аудио. Лог ошибки: ${e}`);
-                document.querySelector(".play_audio span").textContent = "▶";
-                document.querySelector(".play_audio").ariaLabel = "Воспроизвести музыку";
-            });
-            document.querySelector(".play_audio span").textContent = "▌▌";
-            document.querySelector(".play_audio").ariaLabel = "Поставить музыку на паузу";
-        } else {
-            audio.pause();
-            document.querySelector(".play_audio span").textContent = "▶";
-            document.querySelector(".play_audio").ariaLabel = "Воспроизвести музыку";
-        }
-    }
-
-    /* // Автозапуск аудио при первом клике пользователя
-     document.addEventListener('click', () => {
-            audioPlay(audio.paused);
-    }, { once: true }); // выполнится один раз
-     */
-    // Управление кастомным аудиоплеером (пуск/пауза)
-    document.querySelector(".play_audio").addEventListener("click", () => {
-        if (audio.paused) {
-            audioPlay(true);
-        } else {
-            audioPlay(false);
-        }
-    });
-
-    // Автоповтор аудио после завершения
-    document.querySelector(".audio").addEventListener("ended", () => {
-        audio.currentTime = 0;
-        audioPlay(true);
-    });
-    // #endregion
-
-
-    // #region Telegram
-    // #region Functions
-    // Функция для валидации полей
-    function validate(name, email, subject, message, people, payingMethod) {
-        // Проверка ФИО
-        const fioParts = name.split(/\s+/);
-        if (fioParts.length !== 3 || fioParts.some(word => word.length < 2)) {
-            return "Введите корректное ФИО.";
-        }
-
-        // Проверка Email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return "Введите корректный email.";
-        }
-
-        // Проверка заголовка
-        if (subject.length < 5) {
-            return "Заголовок должен быть не короче 5 символов.";
-        }
-
-        // Проверка и сообщения
-        if (message && message.length < 15) {
-            return "Сообщение должно быть не короче 15 символов.";
-        }
-
-        if (people && people <= 0) {
-            return "Количество людей должно превышать 0.";
-        }
-
-        if (payingMethod === "") {
-            return "Выберите способ оплаты.";
-        }
-
-        return false;
-    }
-
-    // Функция отправки сообщения в Telegram-бот
-    function sendMessage(text, nameOfPage) {
-        fetch(`https://api.telegram.org/bot8233373413:AAFXJFUEJuabD4IuGcuvyz4SPRFp0_uIapY/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: "7478877616",
-                text: text
-            })
-        })
-            .then(() => {
-                alert("Сообщение отправлено! Мы скоро свяжемся с вами.");
-
-                // Очистка полей формы
-                document.querySelector(`.${nameOfPage}_content`).reset();
-                document.querySelector('.fn').focus();
-            })
-            .catch(() => {
-                alert("Ошибка отправки. Попробуйте позже.");
-                document.querySelector('#submit').focus();
-            });
-    }
-
-    // #endregion
-
-    if (window.location.pathname.includes('feedback.html')) {
-        document.querySelector(".feedback_input_submit").addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const name = document.querySelector("#f_fn").value.trim();
-            const email = document.querySelector("#f_email").value.trim();
-            const subject = document.querySelector("#topic").value.trim();
-            const message = document.querySelector("#mess").value.trim();
-            const validationResult = validate(name, email, subject, message, undefined, undefined);
-
-            if ([name, subject, email, message].some(x => x === '')) {
-                alert('Все поля должны быть заполнены.');
-                return;
-            } else if (validationResult) {
-                alert(validationResult);
-                return;
-            }
-            // Формирование текста для Telegram
-            const text =
-                "Обратная связь!\n" +
-                "\nИмя: " + name +
-                "\nEmail: " + email +
-                "\nЗаголовок: " + subject +
-                "\nСообщение:\n" + message;
-
-            sendMessage(text, 'feedback');
-        })
-    } else if (window.location.pathname.includes('booking.html')) {
-        document.querySelector(".booking_input_submit").addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const name = document.querySelector("#b_fn").value.trim();
-            const email = document.querySelector("#b_email").value.trim();
-            const excursion = document.querySelector("#excursion").value.trim();
-            const notes = document.querySelector("#notes").value.trim();
-            const people = document.querySelector("#people").value.trim();
-            const payingMethod = document.querySelector("#paying_method").value.trim();
-            const validationResult = validate(name, email, excursion, undefined, people, payingMethod);
-
-            if ([name, excursion, email, people, payingMethod].some(x => x === '')) {
-                alert('Все поля кроме примечаний должны быть заполнены.');
-                return;
-            } else if (validationResult) {
-                alert(validationResult);
-                return;
-            }
-
-
-            // Формирование текста для Telegram
-            const text =
-                "Запись на экскурсию!\n" +
-                "\nИмя: " + name +
-                "\nEmail: " + email +
-                "\nНазвание экскурсии: " + excursion +
-                "\nКол-во людей: " + people +
-                "\nСпособ оплаты: " + payingMethod +
-                (notes ? "\nПримечания: " + notes : "\nПримечаний нет");
-
-
-            sendMessage(text, 'booking');
-        })
-    }
-    // #endregion
-} else {
+if (!russian) {
 
     document.title = 'Архітэктурныя жамчужыны Віцебска';
     document.querySelector('.nav_button').textContent = 'RUS';
@@ -453,251 +442,6 @@ if (LS_language == 'RUS') {
             document.querySelector('.game_clear').textContent = 'Абнуліць зоркі';
             break;
     }
-
-    // #region Script.js
-    // Проверяем, на какой странице пользователь
-    if (window.location.pathname.includes('booking.html')) {
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Получаем параметры из URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const excursionName = urlParams.get('excursion');
-
-            // Если параметр есть, заполняем поле темы
-            if (excursionName) {
-                const excursionInput = document.querySelector('[name="excursion"]');
-                excursionInput.value = `Запіс на экскурсію "${excursionName}"`;
-                excursionInput.readOnly = true;
-            }
-        });
-    }
-
-    // #region Star
-
-    if (!localStorage.getItem('starsCollected')) {
-        localStorage.setItem('starsCollected', 0)
-    }
-
-    const star = document.querySelector('.secret_star');
-
-    if (localStorage.getItem('cheat')) {
-        alert('Збярыце ўсе зоркі, перш чым гуляць у сакрэтную міні-гульню.');
-        localStorage.removeItem('cheat');
-    }
-
-    if (localStorage.getItem('cleared')) {
-        alert('Зоркі абнулены, збірайце іх нанова!');
-        localStorage.removeItem('cleared');
-    }
-
-    if (star) {
-
-        if (localStorage.getItem(`${star.dataset.page}`) === 'true') {
-            star.classList.add('secret_star-collected');
-        }
-
-        console.log(localStorage);
-
-        if (localStorage.getItem('starsCollected') === '5' && !document.querySelector('[href="minigame.html"]')) {
-            const li = document.createElement('li');
-            li.classList.add('nav_item');
-            const a = document.createElement('a');
-            a.textContent = 'Міні-гульня';
-            a.href = 'minigame.html';
-            a.classList.add('nav_link');
-            li.appendChild(a);
-            document.querySelector('.main_nav').appendChild(li);
-        }
-
-        star.addEventListener('click', () => {
-            if (star.classList.contains('secret_star-clicked')) { return; }
-            star.classList.add('secret_star-clicked');
-            localStorage.setItem(`${star.dataset.page}`, 'true');
-            localStorage.setItem('starsCollected', Number(localStorage.getItem('starsCollected')) + 1);
-            if (localStorage.getItem('starsCollected') === '5' && !document.querySelector('[href="minigame.html"]')) {
-                const li = document.createElement('li');
-                li.classList.add('nav_item');
-                const a = document.createElement('a');
-                a.textContent = 'Міні-гульня';
-                a.href = 'minigame.html';
-                a.classList.add('nav_link');
-                li.appendChild(a);
-                document.querySelector('.main_nav').appendChild(li);
-            }
-        })
-    }
-    // #endregion
-
-
-    // #region Audio
-    const audio = document.querySelector('.audio');
-
-    // Функция для запуска / выключения аудио
-    function audioPlay(bool) {
-        if (bool) {
-            audio.play().catch(e => {
-                console.error(`Адбылася памылка пры запуску ці паўзы аўдыё. Лог памылкі: ${e}`);
-                document.querySelector(".play_audio span").textContent = "▶";
-                document.querySelector(".play_audio").ariaLabel = "Прайграць музыку";
-            });
-            document.querySelector(".play_audio span").textContent = "▌▌";
-            document.querySelector(".play_audio").ariaLabel = "Паставіць музыку на паўзу";
-        } else {
-            audio.pause();
-            document.querySelector(".play_audio span").textContent = "▶";
-            document.querySelector(".play_audio").ariaLabel = "Прайграць музыку";
-        }
-    }
-
-    /* // Автозапуск аудио при первом клике пользователя
-     document.addEventListener('click', () => {
-            audioPlay(audio.paused);
-    }, { once: true });
-     */
-    // Управление кастомным аудиоплеером (пуск/пауза)
-    document.querySelector(".play_audio").addEventListener("click", () => {
-        if (audio.paused) {
-            audioPlay(true);
-        } else {
-            audioPlay(false);
-        }
-    });
-
-    // Автоповтор аудио после завершения
-    document.querySelector(".audio").addEventListener("ended", () => {
-        audio.currentTime = 0;
-        audioPlay(true);
-    });
-    // #endregion
-
-
-    // #region Telegram
-    // #region Functions
-    // Функция для валидации полей
-    function validate(name, email, subject, message, people, payingMethod) {
-        // Проверка ФИО
-        const fioParts = name.split(/\s+/);
-        if (fioParts.length !== 3 || fioParts.some(word => word.length < 2)) {
-            return "Увядзіце карэктнае ПІБ.";
-        }
-
-        // Проверка Email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return "Увядзіце карэктны email.";
-        }
-
-        // Проверка заголовка
-        if (subject.length < 5) {
-            return "Загаловак павінен быць не карацейшы за 5 сімвалаў.";
-        }
-
-        // Проверка и сообщения
-        if (message && message.length < 15) {
-            return "Паведамленне павінна быць не карацей 15 сімвалаў.";
-        }
-
-        if (people && people <= 0) {
-            return "Колькасць людзей мусіць перавышаць 0.";
-        }
-
-        if (payingMethod === "") {
-            return "Абярыце спосаб аплаты.";
-        }
-
-        return false;
-    }
-
-    // Функция отправки сообщения в Telegram-бот
-    function sendMessage(text, nameOfPage) {
-        fetch(`https://api.telegram.org/bot8233373413:AAFXJFUEJuabD4IuGcuvyz4SPRFp0_uIapY/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: "7478877616",
-                text: text
-            })
-        })
-            .then(() => {
-                alert("Паведамленне адпраўлена! Мы хутка звяжамся з вамі.");
-
-                // Очистка полей формы
-                document.querySelector(`.${nameOfPage}_content`).reset();
-                document.querySelector('.fn').focus();
-            })
-            .catch(() => {
-                alert("Памылка адпраўкі. Паспрабуйце пазней.");
-                document.querySelector('#submit').focus();
-            });
-    }
-
-    // #endregion
-
-    if (window.location.pathname.includes('feedback.html')) {
-        document.querySelector(".feedback_input_submit").addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const name = document.querySelector("#f_fn").value.trim();
-            const email = document.querySelector("#f_email").value.trim();
-            const subject = document.querySelector("#topic").value.trim();
-            const message = document.querySelector("#mess").value.trim();
-            const validationResult = validate(name, email, subject, message, undefined, undefined);
-
-            if ([name, subject, email, message].some(x => x === '')) {
-                alert('Усе палі павінны быць запоўненыя.');
-                return;
-            } else if (validationResult) {
-                alert(validationResult);
-                return;
-            }
-            // Формирование текста для Telegram
-            const text =
-                "Обратная связь (BEL)!\n" +
-                "\nИмя: " + name +
-                "\nEmail: " + email +
-                "\nЗаголовок: " + subject +
-                "\nСообщение:\n" + message;
-
-            sendMessage(text, 'feedback');
-        })
-    } else if (window.location.pathname.includes('booking.html')) {
-        document.querySelector(".booking_input_submit").addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const name = document.querySelector("#b_fn").value.trim();
-            const email = document.querySelector("#b_email").value.trim();
-            const excursion = document.querySelector("#excursion").value.trim();
-            const notes = document.querySelector("#notes").value.trim();
-            const people = document.querySelector("#people").value.trim();
-            const payingMethod = document.querySelector("#paying_method").value.trim();
-            const validationResult = validate(name, email, excursion, undefined, people, payingMethod);
-
-            if ([name, excursion, email, people, payingMethod].some(x => x === '')) {
-                alert('Усе палі акрамя нататак павінны быць запоўненыя.');
-                return;
-            } else if (validationResult) {
-                alert(validationResult);
-                return;
-            }
-
-
-            // Формирование текста для Telegram
-            const text =
-                "Запись на экскурсию (BEL)!\n" +
-                "\nИмя: " + name +
-                "\nEmail: " + email +
-                "\nНазвание экскурсии: " + excursion +
-                "\nКол-во людей: " + people +
-                "\nСпособ оплаты: " + payingMethod +
-                (notes ? "\nПримечания: " + notes : "\nПримечаний нет");
-
-
-            sendMessage(text, 'booking');
-        })
-    }
-    // #endregion
-
-    // #endregion
 }
 
 // За переключением языков, ведь тут нету текста, который надо менять
