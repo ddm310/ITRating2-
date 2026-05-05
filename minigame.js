@@ -85,7 +85,12 @@ function clicked(img) {
     if (imgsOpen == 2) {
         img.classList.remove('game_img-hidden');
         img.setAttribute('aria-label', excursionsDict[img.dataset.path] + (languageIsRus ? ' (открыта)' : ' (адкрыта)'));
-        if (img.dataset.path !== showedImg.dataset.path) {
+        if (img.dataset.path === showedImg.dataset.path) {
+            imgsOpen = 0;
+            if (document.querySelectorAll('.game_img-hidden').length === 0) {
+                document.querySelector('.game_win').classList.remove('game_win-hidden');
+            }
+        } else {
             setTimeout(() => {
                 img.setAttribute('aria-label', excursionsDict[img.dataset.path] + (languageIsRus ? ' (закрыта)' : ' (зачынена)'));
                 img.classList.add('game_img-hidden');
@@ -93,8 +98,8 @@ function clicked(img) {
                 showedImg.setAttribute('aria-label', excursionsDict[showedImg.dataset.path] + (languageIsRus ? ' (закрыта)' : ' (зачынена)'));
                 imgsOpen = 0;
             }, 1500);
-        } else { imgsOpen = 0; }
-        document.querySelector('.game_attempts').textContent = `Спроб: ${++attempts}`;
+        }
+        document.querySelector('.game_attempts').textContent = (languageIsRus ? 'Попыток: ': 'Спроб: ') + ++attempts;
     } else if (imgsOpen == 1) {
         img.classList.remove('game_img-hidden');
         img.setAttribute('aria-label', excursionsDict[img.dataset.path] + (languageIsRus ? ' (открыта)' : ' (адкрыта)'));
@@ -121,7 +126,7 @@ function initialization() {
     randomImages = [...shuffle(randomImages), ...shuffle(randomImages)];
 
     attempts = 0;
-    document.querySelector('.game_attempts').textContent = `Спроб: 0`;
+    document.querySelector('.game_attempts').textContent = languageIsRus ? 'Попыток: 0' : 'Спроб: 0';
 
     document.querySelector('.game_content').innerHTML = '';
     for (let i = 0; i < 12; i++) {
