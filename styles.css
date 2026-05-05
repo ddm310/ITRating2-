@@ -1417,6 +1417,7 @@ legend {
 
     .excursion_btn {
         width: 100%;
+        max-width: none;
         /* Кнопка "Записаться" во всю ширину */
     }
 
@@ -1439,6 +1440,7 @@ legend {
     .vit_subtitle {
         text-align: center;
         font-size: 16px;
+        max-width: none;
     }
 
     .vit_link {
