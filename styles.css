@@ -435,7 +435,7 @@ a[aria-current='page'] {
 .excursion_tabs {
     display: flex;
     gap: 0 30px;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 }
 
 .excursion_button {
@@ -532,7 +532,7 @@ a[aria-current='page'] {
 }
 
 .excursion_card:hover {
-    box-shadow: 6px 6px 5px 2px color-mix(in oklab, var(--tc) 75%, var(--sc) 25%);
+    box-shadow: 6px 6px 5px 2px var(--tc);
 }
 
 /* Кнопка — резиновая, всегда влезает в карточку */
