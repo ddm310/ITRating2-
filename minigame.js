@@ -62,8 +62,6 @@ let attempts = 0;
 let showedImg;
 let randomImages = [];
 
-randomImages = [...shuffle(randomImages), ...shuffle(randomImages)];
-
 function gameCard(index) {
     const imagePath = randomImages[index];
     const image = document.createElement('div');
