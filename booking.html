@@ -59,7 +59,7 @@
                     <li class="nav_item audio_player">
                         <audio class="audio" src="audio/audio_for_site.mp3" preload="none"></audio>
                         <button class="play_audio" aria-label="Воспроизвести музыку"><span aria-hidden="true">▶</span>
-                            <span class="visually-hidden">Музыка на фон</span></button>
+                            <span class="visually-hidden">Музыка на фон, городские мотивы</span></button>
                     </li>
                 </ul>
             </header>
@@ -71,11 +71,15 @@
         <div class="container">
             <ul class="breadcrumbs_list">
                 <li class="breadcrumbs_item">
-                    <a href="index.html" class="breadcrumbs_link">Главная</a>
+                    <a href="index.html" class="breadcrumbs_link breadcrumbs_element">Главная</a>
                 </li>
                 <li class="breadcrumbs_item">
                     <span class="breadcrumbs_separator" aria-hidden="true">/</span>
-                    <span class="breadcrumbs_current">Запись на экскурсию</span>
+                    <a href="excursion.html" class="breadcrumbs_link breadcrumbs_element">Экскурсии</a>
+                </li>
+                <li class="breadcrumbs_item">
+                    <span class="breadcrumbs_separator" aria-hidden="true">/</span>
+                    <span class="breadcrumbs_current breadcrumbs_element">Запись на экскурсию</span>
                 </li>
             </ul>
         </div>
@@ -91,17 +95,17 @@
                 <form class="booking_content" id="main">
                     <label for="b_fn" class="visually-hidden">Полное ФИО</label>
                     <input type="text" name="b_fn" class="booking_input_text booking_input fn" id="b_fn"
-                        placeholder='Полное ФИО, например: Иванов Иван Иванович' aria-required="true">
+                        placeholder='Полное ФИО, например: Иванов Иван Иванович' aria-required="true" required>
                     <label for="b_email" class="visually-hidden">Email</label>
                     <input type="text" name="b_email" class="booking_input_text booking_input" id="b_email"
-                        placeholder='Email, например: example@gmail.com' aria-required="true">
+                        placeholder='Email, например: example@gmail.com' aria-required="true" required>
                     <label for="excursion" class="visually-hidden">Экскурсия</label>
                     <input type="text" name="excursion" class="booking_input_text booking_input" id="excursion"
-                        aria-required="true" placeholder="Экскурсия">
+                        aria-required="true" placeholder="Экскурсия" required>
                     <div class="booking_flex_div">
                         <label for="people" class="visually-hidden">Количество людей</label>
                         <input type="number" name="people" class="booking_input_not_text booking_input" id="people"
-                            placeholder="Количество людей" aria-required="true">
+                            placeholder="Количество людей" aria-required="true" required>
                         <label for="paying_method" class="visually-hidden">Способ оплаты</label>
                         <select name="paying_method" class="booking_input_not_text booking_input" id="paying_method"
                             required title="Выберите один из пунктов списка.">
