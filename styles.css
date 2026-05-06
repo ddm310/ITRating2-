@@ -6,7 +6,6 @@
     --ffc: #f6f5f4;
     --sxc: #e8e3d4;
     --svc: #b8995a;
-    --background-color: #ede9e1a6;
     --star-color: #ffd500;
 }
 
@@ -1578,7 +1577,7 @@ legend {
     }
 
     .excursion_button {
-        font-size: 12px;
+        font-size: 20px;
         padding: 8px 4px;
         width: 100%;
     }
